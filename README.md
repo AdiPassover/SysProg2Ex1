@@ -1,15 +1,20 @@
 326627635 | adi.peisach@gmail.com
+
 **Systems Programming 2 - Assignment 1**
 This is a C++ program that gives infromation about simple graphs based on adjacency matrices.
 Note that the adjacency matrix represents a simple graph, which means there is at most one edge from a vertex to another and there are no edges between a vertex and itself. Also, an edge's weight has to be an integer less than the maximum int value and more than the minimal int value.
 
+
 **Instructions**
+
 1. Write an adjacency matrix as a vector of vectors of ints that represents a simple graph and 0 means no edge.
 2. Initiazlie a Graph object and use the loadGraph function to load the matrix to the graph.
 3. Use whichever function you want from the Algorithms class (or printGraph from Graph)
 4. If you want information about a different graph, you can initialize another graph or load another matrix to an existing graph.
 
+
 **The Program**
+
 The program is separated into 2 main classes: Graph and Algorithms.
 When loading a graph using loadGraph, it loads an adjacency matrix into a graph and saves it as adjMatrix where INF (max int) means no edge, and sets numVertices and numEdges to their correct values. Also runs the Floyd-Warshall algorithm twice (the second time for finding negative cycles) and saves the matrices as fields distMatrix and parentMatrix for later algorithms.
 After loading a graph, you can print int using printGraph and get the information about the number of edges and vertices, or use a function from the Algorithms class:
