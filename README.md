@@ -1,6 +1,7 @@
 326627635 | adi.peisach@gmail.com
 
 **Systems Programming 2 - Assignment 1**
+
 This is a C++ program that gives infromation about simple graphs based on adjacency matrices.
 Note that the adjacency matrix represents a simple graph, which means there is at most one edge from a vertex to another and there are no edges between a vertex and itself. Also, an edge's weight has to be an integer less than the maximum int value and more than the minimal int value.
 
