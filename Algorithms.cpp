@@ -33,7 +33,7 @@ string ariel::Algorithms::isContainsCycle(Graph g) {
     for (size_t s = 0; s < g.getNumVertices(); s++) {
         if (state[s] != ariel::State::Undiscovered) continue;
         state[s] = ariel::State::Exploring;
-        size_t v = DFS_Cycle(g,s,&state,&parent);
+        size_t v = DFS_Cycle(g,s,state,parent);
         if (v != INF) // if DFS found a cycle, trace it
             return traceCycle(v,parent);
     }
@@ -41,22 +41,22 @@ string ariel::Algorithms::isContainsCycle(Graph g) {
     return "No cycles in graph.";
 }
 
-size_t ariel::Algorithms::DFS_Cycle(Graph g, size_t start, vector<State>* state, vector<size_t>* parent) {
+size_t ariel::Algorithms::DFS_Cycle(Graph g, size_t start, vector<State>& state, vector<size_t>& parent) {
     // for each of start's neighbours:
     for (size_t v = 0; v < g.getNumVertices(); v++) {
         if (start == v || g.getEdge(start,v) == INF) continue;
-        if ((*state)[v] == ariel::State::Exploring) { // If we are currently exploring a neighbour, this is a cycle.
-            (*parent)[v] = start;
+        if (state[v] == ariel::State::Exploring) { // If we are currently exploring a neighbour, this is a cycle.
+            parent[v] = start;
             return v;
         }
-        if ((*state)[v] == ariel::State::Undiscovered) {
-            (*parent)[v] = start;
-            (*state)[v] = ariel::State::Exploring;
+        if (state[v] == ariel::State::Undiscovered) {
+            parent[v] = start;
+            state[v] = ariel::State::Exploring;
             size_t ans = DFS_Cycle(g,v,state,parent);
             if (ans != INF) return ans;
         }
     }
-    (*state)[start] = ariel::State::Finished;
+    state[start] = ariel::State::Finished;
     return INF;
 }
 
@@ -86,7 +86,7 @@ string ariel::Algorithms::isBipartite(Graph g) {
         }
         if (color[i] == 0) { color[i] = 1; } // If there are no colored neighbours, color it 1
 
-        if (!DFS_Colors(g,i,&color)) return "The graph isn't bipartite.";
+        if (!DFS_Colors(g,i,color)) return "The graph isn't bipartite.";
     }
 
     // If there's a 2-Coloring, find the set of each color. Those are the 2 disjoint sets of the bipartite graph.
@@ -111,13 +111,13 @@ string ariel::Algorithms::isBipartite(Graph g) {
     return ans.append("}");
 }
 
-bool ariel::Algorithms::DFS_Colors(Graph g, size_t start, vector<int>* color) {
+bool ariel::Algorithms::DFS_Colors(Graph g, size_t start, vector<int>& color) {
     // For each of start's neighbours:
     for (size_t v = 0; v < g.getNumVertices(); v++) {
         if (start == v || g.getEdge(start,v) == INF) continue;
-        if ((*color)[v] == (*color)[start]) return false; // If a neighbour has the same color, the 2-coloring failed
-        if ((*color)[v] == 0) {
-            (*color)[v] = 3-(*color)[start]; // Color the neighbour a different color than start
+        if (color[v] == color[start]) return false; // If a neighbour has the same color, the 2-coloring failed
+        if (color[v] == 0) {
+            color[v] = 3-color[start]; // Color the neighbour a different color than start
             if (!DFS_Colors(g,v,color)) return false;
         }
     }

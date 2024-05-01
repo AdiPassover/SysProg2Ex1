@@ -25,26 +25,26 @@ void ariel::Graph::initParentMatrix() {
     }
 }
 
-int ariel::Graph::getEdge(size_t start, size_t end) {
+int ariel::Graph::getEdge(size_t start, size_t end) const {
     if (start >= numVertices || end >= numVertices)
         throw out_of_range("Vertex not in graph");
     return adjMatrix[start][end];
 }
 
-int ariel::Graph::getDistance(size_t start, size_t end) {
+int ariel::Graph::getDistance(size_t start, size_t end) const {
     if (start >= numVertices || end >= numVertices)
         throw out_of_range("Vertex not in graph");
     return distMatrix[start][end];
 }
 
-size_t ariel::Graph::getParent(size_t start, size_t end) {
+size_t ariel::Graph::getParent(size_t start, size_t end) const {
     if (start >= numVertices || end >= numVertices)
         throw out_of_range("Vertex not in graph");
     if (parentMatrix[start][end] < 0) return INF;
     return (size_t)parentMatrix[start][end];
 }
 
-size_t ariel::Graph::getNumVertices() { return numVertices; }
+size_t ariel::Graph::getNumVertices() const { return numVertices; }
 
 void ariel::Graph::loadGraph(vector<vector<int>> matrix) {
     numVertices = matrix.size();
@@ -95,6 +95,6 @@ void ariel::Graph::loadGraph(vector<vector<int>> matrix) {
     }
 }
 
-void ariel::Graph::printGraph() {
+void ariel::Graph::printGraph() const {
     cout << "Graph with " << numVertices << " vertices and " << numEdges << " edges." << endl;
 }

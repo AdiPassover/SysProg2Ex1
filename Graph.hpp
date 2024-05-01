@@ -78,7 +78,7 @@ namespace ariel {
          * "Graph with {number of vertices} vertices and {number of edges} edges."
          * Note that in an undirected graph, each edge is considered two edges.
         */
-        void printGraph();
+        void printGraph() const;
 
         /**
          * Get the weight of an edge between two vertices. Returns INF if there's no edge.
@@ -87,7 +87,7 @@ namespace ariel {
          * @param end The end vertex of the edge
          * @return the weight of the edge or INF if there isn't one
          */
-        int getEdge(size_t start, size_t end);
+        int getEdge(size_t start, size_t end) const;
 
         /**
          * Get the shortest path's (least cost) cost between two vertices. Returns INF if there's no path.
@@ -97,7 +97,7 @@ namespace ariel {
          * @param end The destination vertex
          * @return The shortest path cost, INF if there isn't, MIN_INF if there's a negative cycle.
          */
-        int getDistance(size_t start, size_t end);
+        int getDistance(size_t start, size_t end) const;
 
         /**
          * Get the parent of end in the shortest path (least cost) between start and end. Returns INF if start and end
@@ -107,12 +107,12 @@ namespace ariel {
          * @param end The destination vertex
          * @return The parent of end in the shortest path between start and end, INF if there isn't.
          */
-        size_t getParent(size_t start, size_t end);
+        size_t getParent(size_t start, size_t end) const;
 
         /**
          * @return the number of vertices in the graph.
          */
-        size_t getNumVertices();
+        size_t getNumVertices() const;
 
     };
 

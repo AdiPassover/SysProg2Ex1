@@ -28,7 +28,7 @@ namespace ariel {
          * @param color A pointer of the vector representing the colors of the vertices (color[i] = vertex i's color)
          * @return true if the graph has a 2-coloring, false otherwise
          */
-        static bool DFS_Colors(Graph g, size_t start, vector<int>* color);
+        static bool DFS_Colors(Graph g, size_t start, vector<int>& color);
 
         /**
          * Runs DFS on a graph and marks each vertex's state as undiscovered if the algorithm hasn't been there yet,
@@ -45,7 +45,7 @@ namespace ariel {
          * @param parent A pointer of a vector representing the parents of the vertices (parent[i] = vertex i's parent)
          * @return
          */
-        static size_t DFS_Cycle(Graph g, size_t start, vector<State>* state, vector<size_t>* parent);
+        static size_t DFS_Cycle(Graph g, size_t start, vector<State>& state, vector<size_t>& parent);
 
         /**
          * Trace a cycle in a graph given a starting vertex which is part of the cycle and a vector of the parents of
