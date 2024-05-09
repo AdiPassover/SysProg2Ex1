@@ -25,6 +25,11 @@ namespace ariel {
         size_t numEdges;
 
         /**
+         * Save if the graph is directed or not.
+        */
+        bool directed;
+
+        /**
          * The graph's adjacency matrix.
          */
         vector<vector<int>> adjMatrix;
@@ -113,6 +118,11 @@ namespace ariel {
          * @return the number of vertices in the graph.
          */
         size_t getNumVertices() const;
+
+        /**
+         * @return if the graph is connected.
+        */
+        bool isDirected() const;
 
     };
 

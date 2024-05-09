@@ -45,6 +45,7 @@ size_t ariel::Algorithms::DFS_Cycle(Graph g, size_t start, vector<State>& state,
     // for each of start's neighbours:
     for (size_t v = 0; v < g.getNumVertices(); v++) {
         if (start == v || g.getEdge(start,v) == INF) continue;
+        if (!g.isDirected() && parent[start] == v) continue;
         if (state[v] == ariel::State::Exploring) { // If we are currently exploring a neighbour, this is a cycle.
             parent[v] = start;
             return v;

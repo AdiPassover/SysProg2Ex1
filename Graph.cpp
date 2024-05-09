@@ -46,6 +46,8 @@ size_t ariel::Graph::getParent(size_t start, size_t end) const {
 
 size_t ariel::Graph::getNumVertices() const { return numVertices; }
 
+bool ariel::Graph::isDirected() const { return directed; }
+
 void ariel::Graph::loadGraph(vector<vector<int>> matrix) {
     numVertices = matrix.size();
     numEdges = 0;
@@ -62,6 +64,17 @@ void ariel::Graph::loadGraph(vector<vector<int>> matrix) {
         }
     }
 
+    bool same = true;
+    for (size_t i = 0; i < numVertices; i++) {
+        for (size_t j = 0; j < numVertices; j++) {
+            if (matrix[i][j] != matrix[j][i]) {
+                same = false;
+                break;
+            }
+        }
+    }
+    directed = !same;
+
     // Initializing the matrices for Floyd-Warshall
     initMatrix(&adjMatrix, matrix);
     initMatrix(&distMatrix, matrix);
@@ -72,6 +85,7 @@ void ariel::Graph::loadGraph(vector<vector<int>> matrix) {
         for (size_t i = 0; i < numVertices; i++) {
             for (size_t j = 0; j < numVertices; j++) {
                 if (distMatrix[i][k] == INF || distMatrix[k][j] == INF) { continue; }
+                if (!directed && parentMatrix[i][j] == parentMatrix[k][j]) { continue; }
                 if (distMatrix[i][j] > distMatrix[i][k] + distMatrix[k][j]) {
                     distMatrix[i][j] = distMatrix[i][k] + distMatrix[k][j];
                     parentMatrix[i][j] = parentMatrix[k][j];

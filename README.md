@@ -18,6 +18,9 @@ Note that the adjacency matrix represents a simple graph, which means there is a
 
 The program is separated into 2 main classes: Graph and Algorithms.
 When loading a graph using loadGraph, it loads an adjacency matrix into a graph and saves it as adjMatrix where INF (max int) means no edge, and sets numVertices and numEdges to their correct values. Also runs the Floyd-Warshall algorithm twice (the second time for finding negative cycles) and saves the matrices as fields distMatrix and parentMatrix for later algorithms.
+Note that according to wikipedia (https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm):
+"Obviously, in an undirected graph a negative edge creates a negative cycle (i.e., a closed walk) involving its incident vertices."
+This is why, when looking for a shortest path it is allowed to go back and forth on an edge, and a negative edge in an undirected graph is considered a negaitve cycle.
 After loading a graph, you can print int using printGraph and get the information about the number of edges and vertices, or use a function from the Algorithms class:
 
         /**
