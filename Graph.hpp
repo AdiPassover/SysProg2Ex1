@@ -63,7 +63,6 @@ namespace ariel {
         void initParentMatrix();
 
     public:
-        Graph () {}
 
         /**
          * Load an adjacency matrix into a graph and saves it as adjMatrix and sets numVertices and numEdges to

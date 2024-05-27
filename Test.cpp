@@ -456,3 +456,61 @@ TEST_CASE("Test invalid graph")
     CHECK_THROWS(g5.getParent(4,2));
     CHECK_THROWS(g5.getDistance(4,3));
 }
+
+TEST_CASE("Test loadGraph") {
+    ariel::Graph g;
+    vector<vector<int>> graph1 = {
+            {0, 1, -2, 0, 0},
+            {1, 0, 3, 0, 0},
+            {2, 3, 0, 4, 0},
+            {0, 0, 4, 0, 5},
+            {0, 0, 0, 5, 0}};
+    g.loadGraph(graph1);
+    CHECK(g.getEdge(1,2) == 3);
+    CHECK(g.getEdge(2,3) == 4);
+    CHECK(g.getEdge(3,4) == 5);
+    CHECK(g.getEdge(4,3) == 5);
+
+    vector<vector<int>> graph2 = {
+            {0, -1, 0},
+            {0, 0, -1},
+            {1, 0, 0}};
+    g.loadGraph(graph2);
+    CHECK(g.getEdge(0,1) == -1);
+    CHECK(g.getEdge(1,2) == -1);
+    CHECK(g.getEdge(2,0) == 1);
+    CHECK(g.getEdge(2,1 == INF));
+
+    vector<vector<int>> graph3 = {
+            {0, -2, 6, 0},
+            {3, 0, 1, 0},
+            {7, 0, 0, -1},
+            {5, 2, 0, 0}};
+    g.loadGraph(graph3);
+    CHECK(g.getDistance(0,1) == -2);
+    CHECK(g.getDistance(1,2) == 1);
+    CHECK(g.getDistance(0,3) == -2);
+
+    vector<vector<int>> graph4 =
+            {{0, 7, 3, 1, 0},
+             {0, 0, 0, -4, -4},
+             {2, -1, 0, 0, 0},
+             {0, 0, 8, 0, 0},
+             {0, 0, 0, 3, 0}};
+    g.loadGraph(graph4);
+    CHECK(g.getDistance(0,1) == 2);
+    CHECK(g.getDistance(0,4) == -2);
+    CHECK(g.getDistance(3,1) == 7);
+
+    vector<vector<int>> graph5 = {
+            {0, 1, 0, 0},
+            {0, 0, -3, 0},
+            {-4, 0, 0, 0},
+            {0, 0, 0, 0,}};
+    g.loadGraph(graph5);
+    CHECK(g.getDistance(0,1) == MIN_INF);
+    CHECK(g.getDistance(0,2) == MIN_INF);
+    CHECK(g.getDistance(1,2) == MIN_INF);
+    CHECK(g.getDistance(2,3) == INF);
+
+}
